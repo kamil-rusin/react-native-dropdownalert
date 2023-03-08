@@ -229,16 +229,21 @@ export default class DropdownAlert extends Component {
         this._onDonePan(event, gestureState),
     });
   };
-  _onShouldStartPan = () => {
-    return this.props.panResponderEnabled;
+  _onShouldStartPan = (evt, gestureState) => {
+    console.log("testujemy onStartShouldSetPanResponder", gestureState.dx,
+        gestureState.dy);
+    return gestureState.dx !== 0 && gestureState.dy !== 0;
+    // return this.props.panResponderEnabled;
   };
   _onShouldMovePan = (event, gestureState) => {
     const {sensitivity, panResponderEnabled} = this.props;
-    const dx = Math.abs(gestureState.dx);
-    const dy = Math.abs(gestureState.dy);
-    const isDxSensitivity = dx < sensitivity;
-    const isDySensitivity = dy >= sensitivity;
-    return isDxSensitivity && isDySensitivity && panResponderEnabled;
+    // const dx = Math.abs(gestureState.dx);
+    // const dy = Math.abs(gestureState.dy);
+    // const isDxSensitivity = dx < sensitivity;
+    // const isDySensitivity = dy >= sensitivity;
+    console.log("testujemy onMoveShouldSetPanResponder", gestureState.dx,
+        gestureState.dy);
+    return gestureState.dx !== 0 && gestureState.dy !== 0
   };
   _onMovePan = (event, gestureState) => {
     if (gestureState.dy < 0) {
